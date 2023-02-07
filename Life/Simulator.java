@@ -1,6 +1,13 @@
 import java.util.Random;
+import java.util.TreeMap;
+import java.util.random.RandomGenerator.ArbitrarilyJumpableGenerator;
+
+import javax.lang.model.util.ElementScanner14;
+
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.awt.Color;
 
@@ -121,80 +128,128 @@ public class Simulator {
 		// Show the starting state in the view.
 		view.showStatus(generation, field);
 	}
+	
+	
+	/**	
+	*
+	*
+	*	
+	*/
+	private List<Cell> generateCells(){
+		Location location = new Location(0, 0);
 
+		List<Cell> gridCells = Arrays.asList(
+				new Mycoplasma(field, location, Color.ORANGE),
+				new Youcoplasma(field, location, Color.CYAN),
+				null
+				);
+		
+		// Build map keyed by cumulative weight
+		NavigableMap<Integer, Cell> weighedMap = new TreeMap<>();
+		int totalWeight = 0;
+		for (Cell obj : gridCells) {
+			totalWeight += obj.getWeight();
+			weighedMap.put(totalWeight, obj);
+		}
+		// System.out.println(weighedMap);
+		
+		List<Cell> result = Arrays.asList();
+		// Pick 20 objects randomly according to weight
+		Random rnd = new Random();
+		for (int i = 0; i < 10000; i++) {
+			int pick = rnd.nextInt(totalWeight);
+			location =  new Location(i/field.getWidth(), i%field.getWidth());
+			Cell temp = weighedMap.higherEntry(pick).getValue();
+			temp.setLocation(location);
+			gridCells.add(temp);
+			// System.out.printf("%2d: %s%n", pick, obj);
+		}
+		return gridCells;
+		
+	}
+	
 	
 	/**
-	* Randomly populate the field live/dead life forms
+	* Randomly populate the field live/dead life forms according to the weights
 	*/
+	
+	
 	private void populate() {
 		Random rand = Randomizer.getRandom();
 		field.clear();
 		for (int row = 0; row < field.getDepth(); row++) {
 			for (int col = 0; col < field.getWidth(); col++) {
 
+				
 				Location location = new Location(row, col);
 				
 				Cell myco = new Mycoplasma(field, location, Color.ORANGE);
-				Cell youco = new Youcoplasma(field, location, Color.CYAN);
+				// Cell youco = new Youcoplasma(field, location, Color.CYAN);
+				
+				
+				// Build list of objects
+				
 				Double randDouble = rand.nextDouble();
 				if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
 					cells.add(myco);
+					
 				}
 				
 				else {
 					myco.setDead();
 					cells.add(myco);
 				}
-
+				
+				
 			}
 		}
 	}
-
-
+	
+	
 	// 	Location location = new Location(0, 0);
 	// 	Cell myco = new Mycoplasma(field, location, Color.ORANGE);
 	// 	Cell youco = new Youcoplasma(field, location, Color.CYAN);
 	// 	Cell[] arr = {myco, youco};
-
+	
 	// 	double CELL_SPAWN = 0.1;
 	// 	double MY_SPAWN = ;
-
+	
 	// 	Random rand = Randomizer.getRandom();
 	// 	field.clear();
-
-	// 	for (int row = 0; row < field.getDepth(); row++) {
-	// 		for (int col = 0; col < field.getWidth(); col++) {
-	// 			location = new Location(0, 0);
-	// 			if (rand.nextDouble() <= CELL_SPAWN){
-	// 				for(Cell c : arr){
-	// 					if(rand.nextDouble() <= c.getProbablity()){
-	// 						cells.add(new Cell(field, location, c.getColor()));
-	// 					}
-	// 				}
-	// 			}
-	// 			if (rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
-	// 				cells.add(myco);
-	// 			}
-	// 			else {
-	// 				myco.setDead();
-	// 				cells.add(myco);
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-		
 	
-	/**
-	* Pause for a given time.
-	* @param millisec  The time to pause for, in milliseconds
-	*/
-	private void delay(int millisec) {
-		try {
-			Thread.sleep(millisec);
-		}
-		catch (InterruptedException ie) {
-			// wake up
-		}
-	}
-}
+	// 	for (int row = 0; row < field.getDepth(); row++) {
+		// 		for (int col = 0; col < field.getWidth(); col++) {
+			// 			location = new Location(0, 0);
+			// 			if (rand.nextDouble() <= CELL_SPAWN){
+				// 				for(Cell c : arr){
+					// 					if(rand.nextDouble() <= c.getProbablity()){
+						// 						cells.add(new Cell(field, location, c.getColor()));
+						// 					}
+						// 				}
+						// 			}
+						// 			if (rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+							// 				cells.add(myco);
+							// 			}
+							// 			else {
+								// 				myco.setDead();
+								// 				cells.add(myco);
+								// 			}
+								// 		}
+								// 	}
+								// }
+								
+								
+								
+								/**
+								* Pause for a given time.
+								* @param millisec  The time to pause for, in milliseconds
+								*/
+								private void delay(int millisec) {
+									try {
+										Thread.sleep(millisec);
+									}
+									catch (InterruptedException ie) {
+										// wake up
+									}
+								}
+							}
