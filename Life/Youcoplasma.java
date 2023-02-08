@@ -14,6 +14,10 @@ public class Youcoplasma extends Cell {
 	
 	// The cell's weight for spawning
 	private static int weight;
+
+	// The cell's age when its alive
+	private int age;
+
 	/**
 	* Create a new Mycoplasma.
 	*

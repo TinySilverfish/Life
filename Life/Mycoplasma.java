@@ -14,8 +14,7 @@ import java.util.Random;
 
 public class Mycoplasma extends Cell {
 	
-	// The cell's weight for spawning
-	private static int weight;
+
 	/**
 	* Create a new Mycoplasma.
 	*
@@ -24,7 +23,7 @@ public class Mycoplasma extends Cell {
 	*/
 	public Mycoplasma(Field field, Location location, Color col) {
 		super(field, location, col);
-		weight = 1; // 1/100 chance of spawning
+		
 	}
 	
 	/**
@@ -54,17 +53,17 @@ public class Mycoplasma extends Cell {
 		
 	}
 	
-	/**
-	* Return the cell's weight.
-	* @return The cell's weight.
-	*/
-	protected int getWeight() {
-		return weight;
-	}
-	/**
-	* Sets the cell's weight.
-	*/
-	protected void setWeight(int x) {
-		weight = x;
-	}
+	// /**
+	// * Return the cell's weight.
+	// * @return The cell's weight.
+	// */
+	// protected int getWeight() {
+	// 	return ;
+	// }
+	// /**
+	// * Sets the cell's weight.
+	// */
+	// protected void setWeight(int x) {
+	// 	super.weight = x;
+	// }
 }

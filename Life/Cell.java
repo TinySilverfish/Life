@@ -23,8 +23,11 @@ public abstract class Cell {
 	
 	// The cell's color
 	private Color color = Color.white;
+
+
 	
-	
+		// The cell's weight
+		private int weight;
 	/**
 	* Create a new cell at location in field.
 	*
@@ -37,6 +40,7 @@ public abstract class Cell {
 		this.field = field;
 		setLocation(location);
 		setColor(col);
+		weight = 1;
 	}
 	
 	/**
@@ -113,5 +117,6 @@ public abstract class Cell {
 		return field;
 	}
 	
-	abstract int getWeight();
+	// abstract int getWeight();
+	
 }

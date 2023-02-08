@@ -1,5 +1,3 @@
-import java.io.ObjectInputStream.GetField;
-
 public class Dad {
     static int x = 0;
 
@@ -10,4 +8,5 @@ public class Dad {
     protected void setX(int y){
         x = y;
     }
+   
 }

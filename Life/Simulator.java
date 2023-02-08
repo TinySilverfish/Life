@@ -29,6 +29,7 @@ public class Simulator {
 	// The probability that a Mycoplasma is alive
 	private static final double MYCOPLASMA_ALIVE_PROB = 0.1;
 	
+	private static final double YOUCOPLASMA_ALIVE_PROB = 0.2;
 	// List of cells in the field.
 	private List<Cell> cells;
 	
@@ -96,7 +97,7 @@ public class Simulator {
 	public void simulate(int numGenerations) {
 		for (int gen = 1; gen <= numGenerations && view.isViable(field); gen++) {
 			simOneGeneration();
-			delay(1);   // comment out to run simulation faster
+			delay(1000000);   // comment out to run simulation faster
 		}
 	}
 	
@@ -135,38 +136,40 @@ public class Simulator {
 	*
 	*	
 	*/
-	private List<Cell> generateCells(){
-		Location location = new Location(0, 0);
+	// private List<Cell> generateCells(){
+	// 	Location location = new Location(0, 0);
 
-		List<Cell> gridCells = Arrays.asList(
-				new Mycoplasma(field, location, Color.ORANGE),
-				new Youcoplasma(field, location, Color.CYAN),
-				null
-				);
+	// 	List<Cell> gridCells = Arrays.asList(
+	// 			new Mycoplasma(field, location, Color.ORANGE),
+	// 			new Youcoplasma(field, location, Color.CYAN),
+	// 			null
+	// 			);
+	// 	//Setting weights
+	// 	// gridCells.get(0).setWeight(6);
 		
-		// Build map keyed by cumulative weight
-		NavigableMap<Integer, Cell> weighedMap = new TreeMap<>();
-		int totalWeight = 0;
-		for (Cell obj : gridCells) {
-			totalWeight += obj.getWeight();
-			weighedMap.put(totalWeight, obj);
-		}
-		// System.out.println(weighedMap);
+	// 	// Build map keyed by cumulative weight
+	// 	NavigableMap<Integer, Cell> weighedMap = new TreeMap<>();
+	// 	int totalWeight = 0;
+	// 	for (Cell obj : gridCells) {
+	// 		totalWeight += obj.getWeight();
+	// 		weighedMap.put(totalWeight, obj);
+	// 	}
+	// 	// System.out.println(weighedMap);
 		
-		List<Cell> result = Arrays.asList();
-		// Pick 20 objects randomly according to weight
-		Random rnd = new Random();
-		for (int i = 0; i < 10000; i++) {
-			int pick = rnd.nextInt(totalWeight);
-			location =  new Location(i/field.getWidth(), i%field.getWidth());
-			Cell temp = weighedMap.higherEntry(pick).getValue();
-			temp.setLocation(location);
-			gridCells.add(temp);
-			// System.out.printf("%2d: %s%n", pick, obj);
-		}
-		return gridCells;
+	// 	List<Cell> result = Arrays.asList();
+	// 	// Pick 20 objects randomly according to weight
+	// 	Random rnd = new Random();
+	// 	for (int i = 0; i < 10000; i++) {
+	// 		int pick = rnd.nextInt(totalWeight);
+	// 		location =  new Location(i/field.getWidth(), i%field.getWidth());
+	// 		Cell temp = weighedMap.higherEntry(pick).getValue();
+	// 		temp.setLocation(location);
+	// 		gridCells.add(temp);
+	// 		// System.out.printf("%2d: %s%n", pick, obj);
+	// 	}
+	// 	return gridCells;
 		
-	}
+	// }
 	
 	
 	/**
@@ -183,21 +186,25 @@ public class Simulator {
 				
 				Location location = new Location(row, col);
 				
-				Cell myco = new Mycoplasma(field, location, Color.ORANGE);
-				// Cell youco = new Youcoplasma(field, location, Color.CYAN);
-				
-				
 				// Build list of objects
 				
 				Double randDouble = rand.nextDouble();
+
 				if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
+					Cell myco = new Mycoplasma(field, location, Color.ORANGE);
 					cells.add(myco);
 					
+				}else if(randDouble <= YOUCOPLASMA_ALIVE_PROB){
+					Cell youco = new Youcoplasma(field, location, Color.CYAN);
+					cells.add(youco);
 				}
-				
-				else {
+				else if(randDouble <= 0.9){
+					Cell myco = new Mycoplasma(field, location, Color.ORANGE);
 					myco.setDead();
 					cells.add(myco);
+				}
+				else{
+					continue;
 				}
 				
 				
@@ -240,16 +247,16 @@ public class Simulator {
 								
 								
 								
-								/**
-								* Pause for a given time.
-								* @param millisec  The time to pause for, in milliseconds
-								*/
-								private void delay(int millisec) {
-									try {
-										Thread.sleep(millisec);
-									}
-									catch (InterruptedException ie) {
-										// wake up
-									}
-								}
+	/**
+	* Pause for a given time.
+	* @param millisec  The time to pause for, in milliseconds
+	*/
+	private void delay(int millisec) {
+		try {
+			Thread.sleep(millisec);
+		}
+		catch (InterruptedException ie) {
+			// wake up
+		}
+	}
 							}
