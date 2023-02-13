@@ -29,7 +29,7 @@ public class Simulator {
 	// The probability that a Mycoplasma is alive
 	private static final double MYCOPLASMA_ALIVE_PROB = 0.1;
 	
-	private static final double YOUCOPLASMA_ALIVE_PROB = 0.2;
+	private static final double YOUCOPLASMA_ALIVE_PROB = 0.3;
 	// List of cells in the field.
 	private List<Cell> cells;
 	
@@ -47,7 +47,7 @@ public class Simulator {
 	*/
 	public static void main(String[] args) {
 		Simulator sim = new Simulator(100, 100);
-		sim.simulate(10000);
+		sim.simulate(1000);
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class Simulator {
 	public void simulate(int numGenerations) {
 		for (int gen = 1; gen <= numGenerations && view.isViable(field); gen++) {
 			simOneGeneration();
-			delay(1000000);   // comment out to run simulation faster
+			delay(100);   // comment out to run simulation faster
 		}
 	}
 	
@@ -198,14 +198,21 @@ public class Simulator {
 					Cell youco = new Youcoplasma(field, location, Color.CYAN);
 					cells.add(youco);
 				}
-				else if(randDouble <= 0.9){
-					Cell myco = new Mycoplasma(field, location, Color.ORANGE);
-					myco.setDead();
-					cells.add(myco);
-				}
+				
 				else{
-					continue;
+					randDouble = rand.nextDouble();
+					if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
+						Cell myco = new Mycoplasma(field, location, Color.ORANGE);
+						myco.setDead();
+						cells.add(myco);
+						
+					}else{
+						Cell youco = new Youcoplasma(field, location, Color.CYAN);
+						youco.setDead();
+						cells.add(youco);
+					}
 				}
+
 				
 				
 			}

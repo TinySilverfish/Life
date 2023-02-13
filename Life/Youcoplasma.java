@@ -44,7 +44,7 @@ public class Youcoplasma extends Cell {
 			setNextState(true);
 		}
 		else {
-			if (neighbours.size() == 3) {
+			if (neighbours.size() == 1) {
 				setNextState(true);
 			}
 		}
