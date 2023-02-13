@@ -15,6 +15,7 @@ import java.util.Random;
 public class Mycoplasma extends Cell {
 	
 
+
 	/**
 	* Create a new Mycoplasma.
 	*
@@ -22,8 +23,7 @@ public class Mycoplasma extends Cell {
 	* @param location The location within the field.
 	*/
 	public Mycoplasma(Field field, Location location, Color col) {
-		super(field, location, col);
-		
+		super(field, location, col);		
 	}
 	
 	/**
@@ -41,17 +41,23 @@ public class Mycoplasma extends Cell {
 		setNextState(false);
 		
 		
+		
 		if (isAlive()) {
-			if (neighbours.size() > 1 && neighbours.size() < 4)
-			setNextState(true);
+			if (neighbours.size() > 1 && neighbours.size() < 4) {
+				setNextState(true);
+			}
 		}
 		else {
 			if (neighbours.size() == 3) {
 				setNextState(true);
 			}
 		}
+
+
 		
 	}
+
+
 	
 	// /**
 	// * Return the cell's weight.

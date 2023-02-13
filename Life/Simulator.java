@@ -27,9 +27,9 @@ public class Simulator {
 	private static final int DEFAULT_DEPTH = 100;
 	
 	// The probability that a Mycoplasma is alive
-	private static final double MYCOPLASMA_ALIVE_PROB = 0.1;
+	private static final double MYCOPLASMA_ALIVE_PROB = 0.3;
 	
-	private static final double YOUCOPLASMA_ALIVE_PROB = 0.3;
+	private static final double YOUCOPLASMA_ALIVE_PROB = 0.6;
 	// List of cells in the field.
 	private List<Cell> cells;
 	
@@ -41,12 +41,14 @@ public class Simulator {
 	
 	// A graphical view of the simulation.
 	private SimulatorView view;
+
+	private Color pink = new Color(249, 181, 208);
 	
 	/**
 	* Execute simulation
 	*/
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(100, 100);
+		Simulator sim = new Simulator(25, 25);
 		sim.simulate(1000);
 	}
 	
@@ -97,7 +99,7 @@ public class Simulator {
 	public void simulate(int numGenerations) {
 		for (int gen = 1; gen <= numGenerations && view.isViable(field); gen++) {
 			simOneGeneration();
-			delay(100);   // comment out to run simulation faster
+			delay(2500);   // comment out to run simulation faster
 		}
 	}
 	
@@ -188,13 +190,14 @@ public class Simulator {
 				
 				// Build list of objects
 				
-				Double randDouble = rand.nextDouble();
+				Double randDouble = rand.nextDouble();  
 
 				if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
-					Cell myco = new Mycoplasma(field, location, Color.ORANGE);
+					Cell myco = new Mycoplasma(field, location, Color.PINK);
 					cells.add(myco);
 					
-				}else if(randDouble <= YOUCOPLASMA_ALIVE_PROB){
+				}
+				else if(randDouble <= YOUCOPLASMA_ALIVE_PROB) {
 					Cell youco = new Youcoplasma(field, location, Color.CYAN);
 					cells.add(youco);
 				}
@@ -202,55 +205,21 @@ public class Simulator {
 				else{
 					randDouble = rand.nextDouble();
 					if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
-						Cell myco = new Mycoplasma(field, location, Color.ORANGE);
+						Cell myco = new Mycoplasma(field, location, Color.PINK);
 						myco.setDead();
 						cells.add(myco);
 						
-					}else{
+					}
+					else {
 						Cell youco = new Youcoplasma(field, location, Color.CYAN);
 						youco.setDead();
 						cells.add(youco);
 					}
-				}
-
-				
-				
+				}	
 			}
 		}
 	}
 	
-	
-	// 	Location location = new Location(0, 0);
-	// 	Cell myco = new Mycoplasma(field, location, Color.ORANGE);
-	// 	Cell youco = new Youcoplasma(field, location, Color.CYAN);
-	// 	Cell[] arr = {myco, youco};
-	
-	// 	double CELL_SPAWN = 0.1;
-	// 	double MY_SPAWN = ;
-	
-	// 	Random rand = Randomizer.getRandom();
-	// 	field.clear();
-	
-	// 	for (int row = 0; row < field.getDepth(); row++) {
-		// 		for (int col = 0; col < field.getWidth(); col++) {
-			// 			location = new Location(0, 0);
-			// 			if (rand.nextDouble() <= CELL_SPAWN){
-				// 				for(Cell c : arr){
-					// 					if(rand.nextDouble() <= c.getProbablity()){
-						// 						cells.add(new Cell(field, location, c.getColor()));
-						// 					}
-						// 				}
-						// 			}
-						// 			if (rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
-							// 				cells.add(myco);
-							// 			}
-							// 			else {
-								// 				myco.setDead();
-								// 				cells.add(myco);
-								// 			}
-								// 		}
-								// 	}
-								// }
 								
 								
 								

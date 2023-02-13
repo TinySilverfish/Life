@@ -12,11 +12,12 @@ import java.util.Random;
 
 public class Youcoplasma extends Cell {
 	
-	// The cell's weight for spawning
-	private static int weight;
 
-	// The cell's age when its alive
-	private int age;
+	private final int DEAD_AGE = 2;
+
+	private final Color MID_COLOR = new Color(69, 191, 85);
+
+	private final Color DEAD_COLOR = new Color(4, 77, 41);
 
 	/**
 	* Create a new Mycoplasma.
@@ -26,7 +27,6 @@ public class Youcoplasma extends Cell {
 	*/
 	public Youcoplasma(Field field, Location location, Color col) {
 		super(field, location, col);
-		weight = 1; // 1/100 chance of spawning
 	}
 	
 	/**
@@ -40,28 +40,45 @@ public class Youcoplasma extends Cell {
 		
 		
 		if (isAlive()) {
-			if (neighbours.size() > 1 && neighbours.size() < 4)
-			setNextState(true);
+			if (neighbours.size() > 1 && neighbours.size() < 4) {
+				setNextState(true);
+				incrementAge();
+
+			}
+			else {
+				setAge(0);
+			}
 		}
 		else {
 			if (neighbours.size() == 1) {
 				setNextState(true);
+				incrementAge();
+
+			}
+			else {
+				setAge(0);
 			}
 		}
-		
+
+
+		if (age > DEAD_AGE) {
+			setNextState(false);
+			setAge(0);
+		} 
+
+		updateColor();
+
+
 	}
-	
-	/**
-	* Return the cell's weight.
-	* @return The cell's weight.
-	*/
-	protected int getWeight() {
-		return weight;
-	}
-	/**
-	* Sets the cell's weight.
-	*/
-	protected void setWeight(int x) {
-		weight = x;
+
+	private void updateColor() {
+		switch (age) {
+			case 1:
+				setColor(MID_COLOR);
+				break;
+			case 2:
+				setColor(DEAD_COLOR);
+				break;
+		}
 	}
 }

@@ -24,10 +24,9 @@ public abstract class Cell {
 	// The cell's color
 	private Color color = Color.white;
 
+	protected int age;
 
-	
-		// The cell's weight
-		private int weight;
+
 	/**
 	* Create a new cell at location in field.
 	*
@@ -40,7 +39,7 @@ public abstract class Cell {
 		this.field = field;
 		setLocation(location);
 		setColor(col);
-		weight = 1;
+		age = 0;
 	}
 	
 	/**
@@ -48,6 +47,18 @@ public abstract class Cell {
 	* next generation.
 	*/
 	abstract public void act();
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int i) {
+		age = i;
+	}
+
+	public void incrementAge() {
+		age++;
+	}
 	
 	/**
 	* Check whether the cell is alive or not.
@@ -116,7 +127,5 @@ public abstract class Cell {
 	protected Field getField() {
 		return field;
 	}
-	
-	// abstract int getWeight();
 	
 }
