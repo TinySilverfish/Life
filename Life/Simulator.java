@@ -130,50 +130,18 @@ public class Simulator {
 		
 		// Show the starting state in the view.
 		view.showStatus(generation, field);
-	}
-	
-	
-	/**	
-	*
-	*
-	*	
-	*/
-	// private List<Cell> generateCells(){
-	// 	Location location = new Location(0, 0);
+	} 
+		
+	private void populateHelper(Cell cell) {
+		Random rand = Randomizer.getRandom();
+		int randInt = rand.nextInt(1,3);  	
+		
+		if (randInt == 2){
+			cell.setDead();
+		}
+		cells.add(cell);
 
-	// 	List<Cell> gridCells = Arrays.asList(
-	// 			new Mycoplasma(field, location, Color.ORANGE),
-	// 			new Youcoplasma(field, location, Color.CYAN),
-	// 			null
-	// 			);
-	// 	//Setting weights
-	// 	// gridCells.get(0).setWeight(6);
-		
-	// 	// Build map keyed by cumulative weight
-	// 	NavigableMap<Integer, Cell> weighedMap = new TreeMap<>();
-	// 	int totalWeight = 0;
-	// 	for (Cell obj : gridCells) {
-	// 		totalWeight += obj.getWeight();
-	// 		weighedMap.put(totalWeight, obj);
-	// 	}
-	// 	// System.out.println(weighedMap);
-		
-	// 	List<Cell> result = Arrays.asList();
-	// 	// Pick 20 objects randomly according to weight
-	// 	Random rnd = new Random();
-	// 	for (int i = 0; i < 10000; i++) {
-	// 		int pick = rnd.nextInt(totalWeight);
-	// 		location =  new Location(i/field.getWidth(), i%field.getWidth());
-	// 		Cell temp = weighedMap.higherEntry(pick).getValue();
-	// 		temp.setLocation(location);
-	// 		gridCells.add(temp);
-	// 		// System.out.printf("%2d: %s%n", pick, obj);
-	// 	}
-	// 	return gridCells;
-		
-	// }
-	
-	
+	}
 	/**
 	* Randomly populate the field live/dead life forms according to the weights
 	*/
@@ -192,30 +160,58 @@ public class Simulator {
 				
 				Double randDouble = rand.nextDouble();  
 
-				if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
-					Cell myco = new Mycoplasma(field, location, Color.PINK);
-					cells.add(myco);
-					
-				}
-				else if(randDouble <= YOUCOPLASMA_ALIVE_PROB) {
-					Cell youco = new Youcoplasma(field, location, Color.CYAN);
-					cells.add(youco);
-				}
-				
-				else{
-					randDouble = rand.nextDouble();
-					if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
+				int randInt = rand.nextInt(1, 6);
+				switch(randInt){
+					case 1:
 						Cell myco = new Mycoplasma(field, location, Color.PINK);
-						myco.setDead();
-						cells.add(myco);
-						
-					}
-					else {
+						populateHelper(myco);
+						break;
+					case 2:
 						Cell youco = new Youcoplasma(field, location, Color.CYAN);
-						youco.setDead();
-						cells.add(youco);
-					}
-				}	
+						populateHelper(youco);
+						break;
+					case 3:
+						Cell theirco = new Theircoplasma(field, location, Color.GREEN);
+						populateHelper(theirco);
+						break;
+					case 4:
+						Cell theyco = new Theycoplasma(field, location, Color.PINK);
+						populateHelper(theyco);
+						break;
+					case 5:
+						Cell meco = new Mecoplasma(field, location, Color.BLACK);
+						populateHelper(meco);
+					 break;
+					// case 5:
+					// 	Cell ourco = new Ourcoplasma(field, location, Color.CYAN);
+					// 	populateHelper(ourco);
+					//	break;
+				}
+
+				// if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
+				// 	Cell myco = new Mycoplasma(field, location, Color.PINK);
+				// 	cells.add(myco);
+					
+				// }
+				// else if(randDouble <= YOUCOPLASMA_ALIVE_PROB) {
+				// 	Cell youco = new Youcoplasma(field, location, Color.CYAN);
+				// 	cells.add(youco);
+				// }
+				
+				// else{
+				// 	randDouble = rand.nextDouble();
+				// 	if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
+				// 		Cell myco = new Mycoplasma(field, location, Color.PINK);
+				// 		myco.setDead();
+				// 		cells.add(myco);
+						
+				// 	}
+				// 	else {
+				// 		Cell youco = new Youcoplasma(field, location, Color.CYAN);
+				// 		youco.setDead();
+				// 		cells.add(youco);
+				// 	}
+				// }	
 			}
 		}
 	}
@@ -235,4 +231,4 @@ public class Simulator {
 			// wake up
 		}
 	}
-							}
+}

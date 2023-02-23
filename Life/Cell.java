@@ -128,4 +128,7 @@ public abstract class Cell {
 		return field;
 	}
 	
+	protected boolean getNextState(){
+		return nextAlive;
+	}
 }

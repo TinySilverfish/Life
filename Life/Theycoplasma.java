@@ -12,9 +12,7 @@ import java.util.Random;
 * @version 2022.01.06 (1)
 */
 
-public class Mycoplasma extends Cell {
-	
-
+public class Theycoplasma extends Cell {
 
 	/**
 	* Create a new Mycoplasma.
@@ -22,7 +20,8 @@ public class Mycoplasma extends Cell {
 	* @param field The field currently occupied.
 	* @param location The location within the field.
 	*/
-	public Mycoplasma(Field field, Location location, Color col) {
+    private Cell partner;
+	public Theycoplasma(Field field, Location location, Color col) {
 		super(field, location, col);		
 	}
 	
@@ -33,29 +32,37 @@ public class Mycoplasma extends Cell {
 	*  -if it has 2 or 3 neighbours it stays alive otherwise dies
 	* 
 	* If cell = Dead
-	*  -if it has 3 neighbours it alivens, otherwise stays dead 
+	*  -if it has 3 neighbours it alives, otherwise stays dead 
 	* 
 	*/
 	public void act() {
 		List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
 		setNextState(false);
 		
-		
-		
+        int size = neighbours.size();
+
 		if (isAlive()) {
 			if (neighbours.size() > 1 && neighbours.size() < 4) {
 				setNextState(true);
-				incrementAge();
-			}
-			else{
-				setAge(0);
 			}
 		}
 		else {
 			if (neighbours.size() == 3) {
 				setNextState(true);
-				incrementAge();
 			}
 		}
+
+        for (Cell c : neighbours){
+            if (c instanceof Theircoplasma){
+                size = c.getField().getLivingNeighbours(c.getLocation()).size();
+
+                if ( size > 4 && size < 7) {
+                    setNextState(true);
+                    break;
+                }
+                
+            }
+        }
 	}
+
 }
