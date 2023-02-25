@@ -35,6 +35,12 @@ public class SimulatorView extends JFrame {
 	
 	// A statistics object computing and storing simulation information
 	private FieldStats stats;
+
+	private JButton pauseButton;
+
+    private JButton resumeButton;
+
+	private volatile boolean isPaused = false;
 	
 	/**
 	* Create a view of the given width and height.
@@ -63,6 +69,29 @@ public class SimulatorView extends JFrame {
 		contents.add(population, BorderLayout.SOUTH);
 		pack();
 		setVisible(true);
+
+		pauseButton = new JButton("Pause");
+		pauseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isPaused = true;
+				pauseButton.setEnabled(false);
+                resumeButton.setEnabled(true);
+			}
+		});
+
+		resumeButton = new JButton("Resume");
+		resumeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isPaused = false;
+				pauseButton.setEnabled(true);
+                resumeButton.setEnabled(false);
+			}
+		});
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.add(pauseButton);
+		buttonPane.add(resumeButton);
+		contents.add(buttonPane, BorderLayout.NORTH);
 	}
 	
 	/**
