@@ -98,8 +98,15 @@ public class Simulator {
 	*/
 	public void simulate(int numGenerations) {
 		for (int gen = 1; gen <= numGenerations && view.isViable(field); gen++) {
+
+			if(view.isPaused()){
+				delay(100);
+				gen--;
+				continue;
+			}
+
 			simOneGeneration();
-			delay(2500);   // comment out to run simulation faster
+			delay(250);   // comment out to run simulation faster
 		}
 	}
 	

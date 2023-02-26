@@ -94,6 +94,11 @@ public class SimulatorView extends JFrame {
 		contents.add(buttonPane, BorderLayout.NORTH);
 	}
 	
+
+	public boolean isPaused(){
+		return isPaused;
+	}
+	
 	/**
 	* Display a short information label at the top of the window.
 	*/
@@ -224,5 +229,7 @@ public class SimulatorView extends JFrame {
 				}
 			}
 		}
+
+		
 	}
 }

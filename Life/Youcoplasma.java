@@ -13,7 +13,7 @@ import java.util.Random;
 public class Youcoplasma extends Cell {
 	
 
-	private final int DEAD_AGE = 2;
+	private final int DEAD_AGE = 4;
 
 	private final Color MID_COLOR = new Color(69, 191, 85);
 
@@ -76,7 +76,7 @@ public class Youcoplasma extends Cell {
 			case 1:
 				setColor(MID_COLOR);
 				break;
-			case 2:
+			case 3:
 				setColor(DEAD_COLOR);
 				break;
 		}
