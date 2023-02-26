@@ -45,17 +45,14 @@ public class Mycoplasma extends Cell {
 		if (isAlive()) {
 			if (neighbours.size() > 1 && neighbours.size() < 4) {
 				setNextState(true);
-				incrementAge();
-			}
-			else{
-				setAge(0);
 			}
 		}
 		else {
 			if (neighbours.size() == 3) {
 				setNextState(true);
-				incrementAge();
 			}
 		}
+
+		updateAge();
 	}
 }

@@ -98,15 +98,20 @@ public class Simulator {
 	*/
 	public void simulate(int numGenerations) {
 		for (int gen = 1; gen <= numGenerations && view.isViable(field); gen++) {
-
-			if(view.isPaused()){
+			// If the simulation is paused, wait for the user to step through the generations.
+			while (view.isPaused() && !view.isStep()) {
 				delay(100);
-				gen--;
-				continue;
 			}
-
-			simOneGeneration();
-			delay(250);   // comment out to run simulation faster
+			
+			// If the user has clicked the "step" button, clear the flag and run one generation.
+			if (view.isStep()) {
+				simOneGeneration();
+				view.clearStep();
+			} else {
+				// Otherwise, run the simulation as normal.
+				simOneGeneration();
+				delay(250);   // comment out to run simulation faster
+			}
 		}
 	}
 	
@@ -186,7 +191,7 @@ public class Simulator {
 						populateHelper(theyco);
 						break;
 					case 5:
-						Cell meco = new Mecoplasma(field, location, Color.BLACK);
+						Cell meco = new Mecoplasma(field, location, Color.magenta);
 						populateHelper(meco);
 					 break;
 					// case 5:

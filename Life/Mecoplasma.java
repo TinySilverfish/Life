@@ -42,20 +42,15 @@ public class Mecoplasma extends Cell {
         if (isAlive()) {
             if (neighbours.size() > minValue && neighbours.size() < maxValue) {
                 setNextState(true);
-                incrementAge();
-            }
-            else {
-                setAge(0);
             }
         }
         else {
             if (neighbours.size() == minValue) {
                 setNextState(true);
-                incrementAge();
-            }
-            else {
-                setAge(0);
             }
         }
+        
+        updateAge();
     }
 }
+

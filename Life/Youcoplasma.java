@@ -42,30 +42,19 @@ public class Youcoplasma extends Cell {
 		if (isAlive()) {
 			if (neighbours.size() > 1 && neighbours.size() < 4) {
 				setNextState(true);
-				incrementAge();
-
-			}
-			else {
-				setAge(0);
 			}
 		}
 		else {
 			if (neighbours.size() == 1) {
 				setNextState(true);
-				incrementAge();
-
-			}
-			else {
-				setAge(0);
 			}
 		}
 
-
 		if (age > DEAD_AGE) {
 			setNextState(false);
-			setAge(0);
 		} 
 
+		updateAge();
 		updateColor();
 
 

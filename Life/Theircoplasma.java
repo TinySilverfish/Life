@@ -37,6 +37,7 @@ public class Theircoplasma extends Cell {
 	*/
     
 	public void act() {
+
 		List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
 		setNextState(false);
 
@@ -45,14 +46,12 @@ public class Theircoplasma extends Cell {
             
 			if ( size > 1 && size < 4) {
 				setNextState(true);
-                incrementAge();
 			}
 
 		}
 		else {
 			if (neighbours.size() == 3) {
 				setNextState(true);
-                incrementAge();
 			}
 		}
 
@@ -62,15 +61,13 @@ public class Theircoplasma extends Cell {
 
                 if ( size > 4 && size < 7) {
                     setNextState(true);
-                    incrementAge();
                     break;
                 }
                 
             }
         }
-        if (this.getNextState() == false){
-            setAge(0);
-        }
+
+		updateAge();
 	}
 
 }

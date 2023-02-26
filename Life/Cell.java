@@ -131,4 +131,13 @@ public abstract class Cell {
 	protected boolean getNextState(){
 		return nextAlive;
 	}
+
+	protected void updateAge(){
+		if (getNextState()) {
+			incrementAge();
+		}
+		else {
+			age = 0;
+		}
+	}
 }

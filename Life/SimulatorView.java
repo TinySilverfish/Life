@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class SimulatorView extends JFrame {
 	// Colors used for empty locations.
-	private static final Color EMPTY_COLOR = Color.white;
+	private static final Color EMPTY_COLOR = Color.red;
 	
 	// Color used for objects that have no defined color.
 	private static final Color UNKNOWN_COLOR = Color.gray;
@@ -40,8 +40,11 @@ public class SimulatorView extends JFrame {
 
     private JButton resumeButton;
 
+	private JButton stepButton;
+
 	private volatile boolean isPaused = false;
 	
+	private boolean isStep = true;
 	/**
 	* Create a view of the given width and height.
 	* @param height The simulation's height.
@@ -88,17 +91,35 @@ public class SimulatorView extends JFrame {
 			}
 		});
 
+		stepButton = new JButton("Step");
+		stepButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isPaused = true;
+				pauseButton.setEnabled(false);
+				resumeButton.setEnabled(true);
+				isStep = true;
+			}
+		});
+
 		JPanel buttonPane = new JPanel();
 		buttonPane.add(pauseButton);
 		buttonPane.add(resumeButton);
+		buttonPane.add(stepButton);
 		contents.add(buttonPane, BorderLayout.NORTH);
 	}
 	
 
-	public boolean isPaused(){
+	public boolean isPaused() {
 		return isPaused;
 	}
 	
+	public boolean isStep() {
+		return isStep;
+	}
+
+	public void clearStep() {
+		isStep= false;
+	}
 	/**
 	* Display a short information label at the top of the window.
 	*/
