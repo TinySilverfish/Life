@@ -64,7 +64,7 @@ public class Theycoplasma extends Cell {
             }
         }
 
-		updateAge();
+		updateAll();
 	}
 
 }

@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class SimulatorView extends JFrame {
 	// Colors used for empty locations.
-	private static final Color EMPTY_COLOR = Color.black;
+	private static final Color EMPTY_COLOR = Color.white;
 	
 	// Color used for objects that have no defined color.
 	private static final Color UNKNOWN_COLOR = Color.gray;
@@ -42,7 +42,7 @@ public class SimulatorView extends JFrame {
 
 	private JButton stepButton;
 
-	private volatile boolean isPaused = false;
+	private volatile boolean isPaused = true;
 	
 	private boolean isStep = true;
 	/**

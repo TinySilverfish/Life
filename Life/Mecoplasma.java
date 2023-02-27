@@ -50,7 +50,7 @@ public class Mecoplasma extends Cell {
             }
         }
         
-        updateAge();
+        updateAll();
     }
 }
 

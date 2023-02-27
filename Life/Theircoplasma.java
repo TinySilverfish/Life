@@ -67,7 +67,7 @@ public class Theircoplasma extends Cell {
             }
         }
 
-		updateAge();
+		updateAll();
 	}
 
 }

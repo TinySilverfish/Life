@@ -13,8 +13,6 @@ import java.util.Random;
 */
 
 public class Mycoplasma extends Cell {
-	
-
 
 	/**
 	* Create a new Mycoplasma.
@@ -40,8 +38,6 @@ public class Mycoplasma extends Cell {
 		List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
 		setNextState(false);
 		
-		
-		
 		if (isAlive()) {
 			if (neighbours.size() > 1 && neighbours.size() < 4) {
 				setNextState(true);
@@ -53,6 +49,6 @@ public class Mycoplasma extends Cell {
 			}
 		}
 
-		updateAge();
+		updateAll();
 	}
 }

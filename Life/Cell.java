@@ -26,7 +26,9 @@ public abstract class Cell {
 
 	protected int age;
 
+	private boolean isInfected;
 
+	private Disease disease;
 	/**
 	* Create a new cell at location in field.
 	*
@@ -139,5 +141,57 @@ public abstract class Cell {
 		else {
 			age = 0;
 		}
+	}
+
+	public void setInfected(boolean isInfected) {
+		this.isInfected = isInfected;
+	}
+
+	public boolean isInfected() {
+		return isInfected;
+	}
+
+	public Disease getDisease(){
+		return disease;
+	}
+
+	public void setDisease(Disease disease){
+		this.disease = disease;
+	}
+
+	public void updateColor(){
+		if (isInfected()) {
+			// Get the color of the disease
+			Color diseaseColor = getDisease().getHue();
+			
+			// Add the two colors by adding their individual RGB components
+			int red = getColor().getRed() + diseaseColor.getRed();
+			int green = getColor().getGreen() + diseaseColor.getGreen();
+			int blue = getColor().getBlue() + diseaseColor.getBlue();
+
+			// Limit the RGB values to the range of 0-255
+			red = Math.min(red, 255);
+			green = Math.min(green, 255);
+			blue = Math.min(blue, 255);
+			
+			// 	Create a new Color object with the added RGB values
+			Color resultColor = new Color(red, green, blue);
+			// Color resultColor = color.BLACK;
+
+			// Set the cell's color to the new color
+			setColor(resultColor);
+		}
+	}
+	private void updateInfection(){
+		if(isInfected()){
+			if(!getNextState()){
+				disease.spread(this);
+			}
+		}
+	}
+	public void updateAll() {
+		updateAge();
+		updateColor();
+		updateInfection();
 	}
 }

@@ -48,7 +48,7 @@ public class Simulator {
 	* Execute simulation
 	*/
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(25, 25);
+		Simulator sim = new Simulator(10, 10);
 		sim.simulate(1000);
 	}
 	
@@ -175,55 +175,45 @@ public class Simulator {
 				int randInt = rand.nextInt(1, 6);
 				switch(randInt){
 					case 1:
-						Cell myco = new Mycoplasma(field, location, Color.PINK);
-						populateHelper(myco);
-						break;
-					case 2:
-						Cell youco = new Youcoplasma(field, location, Color.CYAN);
-						populateHelper(youco);
-						break;
-					case 3:
-						Cell theirco = new Theircoplasma(field, location, Color.GREEN);
-						populateHelper(theirco);
-						break;
+                        Cell myco = new Mycoplasma(field, location, Color.PINK);
+                        populateHelper(myco);
+                        break;
+                    case 2:
+                        Cell youco = new Youcoplasma(field, location, Color.CYAN);
+                        populateHelper(youco);
+                        break;
+                    case 3:
+                        Cell theirco = new Theircoplasma(field, location, Color.GREEN);
+						Disease d = new Virus(1, new Color(0, 0, 255), 10);
+                        theirco.setDisease(d);
+                        theirco.setInfected(true);
+						d.setHost(theirco);
+                        populateHelper(theirco);
+                        break;
 					case 4:
-						Cell theyco = new Theycoplasma(field, location, Color.PINK);
-						populateHelper(theyco);
-						break;
-					case 5:
-						Cell meco = new Mecoplasma(field, location, Color.magenta);
-						populateHelper(meco);
-					 break;
-					// case 5:
+                        Cell theyco = new Theycoplasma(field, location, Color.PINK);
+                        populateHelper(theyco);
+                        break;
+                    case 5:
+                        Cell meco = new Mecoplasma(field, location, Color.magenta);
+                        populateHelper(meco);
+                     	break;
+					// case 6:
 					// 	Cell ourco = new Ourcoplasma(field, location, Color.CYAN);
 					// 	populateHelper(ourco);
 					//	break;
 				}
-
-				// if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
-				// 	Cell myco = new Mycoplasma(field, location, Color.PINK);
-				// 	cells.add(myco);
-					
-				// }
-				// else if(randDouble <= YOUCOPLASMA_ALIVE_PROB) {
-				// 	Cell youco = new Youcoplasma(field, location, Color.CYAN);
-				// 	cells.add(youco);
-				// }
 				
-				// else{
-				// 	randDouble = rand.nextDouble();
-				// 	if (randDouble <= MYCOPLASMA_ALIVE_PROB) {
-				// 		Cell myco = new Mycoplasma(field, location, Color.PINK);
-				// 		myco.setDead();
-				// 		cells.add(myco);
-						
-				// 	}
-				// 	else {
-				// 		Cell youco = new Youcoplasma(field, location, Color.CYAN);
-				// 		youco.setDead();
-				// 		cells.add(youco);
-				// 	}
-				// }	
+				// for(Cell c: cells){
+				// 	if(c.isAlive()){
+				// 		Disease d = new Virus(1, new Color(0, 255,0), 10);
+				// 		c.setDisease(d);
+				// 		c.setInfected(true);
+				// 		d.setHost(c);
+				// 		break;					
+				// 	}			
+				// }
+
 			}
 		}
 	}
