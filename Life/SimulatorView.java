@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class SimulatorView extends JFrame {
 	// Colors used for empty locations.
-	private static final Color EMPTY_COLOR = Color.red;
+	private static final Color EMPTY_COLOR = Color.black;
 	
 	// Color used for objects that have no defined color.
 	private static final Color UNKNOWN_COLOR = Color.gray;

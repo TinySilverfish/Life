@@ -1,5 +1,5 @@
 
 
-public class Virus extends Disease{
-    
-}
+// public class Virus extends Disease{
+
+// }
