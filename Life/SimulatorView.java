@@ -42,7 +42,7 @@ public class SimulatorView extends JFrame {
 
 	private JButton stepButton;
 
-	private volatile boolean isPaused = true;
+	private volatile boolean isPaused = false;
 	
 	private boolean isStep = true;
 	/**

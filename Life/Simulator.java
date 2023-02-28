@@ -48,7 +48,7 @@ public class Simulator {
 	* Execute simulation
 	*/
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(10, 10);
+		Simulator sim = new Simulator(100, 100);
 		sim.simulate(1000);
 	}
 	
@@ -173,6 +173,7 @@ public class Simulator {
 				Double randDouble = rand.nextDouble();  
 
 				int randInt = rand.nextInt(1, 6);
+				
 				switch(randInt){
 					case 1:
                         Cell myco = new Mycoplasma(field, location, Color.PINK);
@@ -184,10 +185,10 @@ public class Simulator {
                         break;
                     case 3:
                         Cell theirco = new Theircoplasma(field, location, Color.GREEN);
-						Disease d = new Virus(1, new Color(0, 0, 255), 10);
-                        theirco.setDisease(d);
-                        theirco.setInfected(true);
-						d.setHost(theirco);
+						// Disease d = new Virus(1, new Color(0, 0, 255), 10);
+                        // theirco.setDisease(d);
+                        // theirco.setInfected(true);
+						// d.setHost(theirco);
                         populateHelper(theirco);
                         break;
 					case 4:
@@ -198,21 +199,7 @@ public class Simulator {
                         Cell meco = new Mecoplasma(field, location, Color.magenta);
                         populateHelper(meco);
                      	break;
-					// case 6:
-					// 	Cell ourco = new Ourcoplasma(field, location, Color.CYAN);
-					// 	populateHelper(ourco);
-					//	break;
 				}
-				
-				// for(Cell c: cells){
-				// 	if(c.isAlive()){
-				// 		Disease d = new Virus(1, new Color(0, 255,0), 10);
-				// 		c.setDisease(d);
-				// 		c.setInfected(true);
-				// 		d.setHost(c);
-				// 		break;					
-				// 	}			
-				// }
 
 			}
 		}
