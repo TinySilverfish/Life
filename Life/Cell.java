@@ -75,12 +75,6 @@ public abstract class Cell {
 	*/
 	protected void setDead() {
 		alive = false;
-		isInfected = false;
-		if(disease != null){
-			disease.deHost();
-			disease = null;
-			
-		}
 		
 	}
 	
@@ -193,12 +187,16 @@ public abstract class Cell {
 		if(isInfected()){
 			if(!getNextState()){
 				disease.spread(this);
+				isInfected = false;
+				disease.deHost();
+				disease = null;
+
 			}
 		}
 	}
 	public void updateAll() {
 		updateAge();
-		updateColor();
 		updateInfection();
+		updateColor();
 	}
 }
