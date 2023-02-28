@@ -33,19 +33,5 @@ public class Fungus extends Disease{
                 fungus.setHost(cell);
             }
         }
-    }
-
-    public void move(){
-        
-    }
-    
-    public int getMaxAge(){
-        return maxAge;
-    }
-    
-    public void setMaxAge(int maxAge){
-        this.maxAge = maxAge;
-    }
-
-    
+    }    
 }

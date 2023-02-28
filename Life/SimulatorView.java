@@ -42,7 +42,7 @@ public class SimulatorView extends JFrame {
 
 	private JButton stepButton;
 
-	private volatile boolean isPaused = true;
+	private volatile boolean isPaused = false;
 	
 	private boolean isStep = true;
 	/**
@@ -149,10 +149,10 @@ public class SimulatorView extends JFrame {
 					stats.incrementCount(cell.getClass());
 					if(cell.isInfected()){
                         stats.incrementCount(cell.getDisease().getClass());
-						fieldView.drawMark(col, row, cell.getColor(), cell.getAge(), "*");
+						fieldView.drawMark(col, row, cell.getColor(), cell.getAge() - 1, "*");
                     }
 					else{
-						fieldView.drawMark(col, row, cell.getColor(), cell.getAge());
+						fieldView.drawMark(col, row, cell.getColor(), cell.getAge() - 1);
 					}
 				}
 				else {
@@ -239,15 +239,14 @@ public class SimulatorView extends JFrame {
 				g.drawString(Integer.toString(age), x * xScale + 2, y * yScale + yScale - 4);
 			}
 		}
-				/**
-		* Paint on grid location on this field in a given color.
-		*/
+
+
 		public void drawMark(int x, int y, Color color, int age, String str) {
 			g.setColor(color);
 			g.fillRect(x * xScale, y * yScale, xScale-1, yScale-1);
 			if (age >= 0) {
 				g.setColor(Color.WHITE);
-				g.drawString(Integer.toString(age)+"str", x * xScale + 2, y * yScale + yScale - 4);
+				g.drawString(Integer.toString(age) + str, x * xScale + 2, y * yScale + yScale - 4);
 			}
 		}
 		

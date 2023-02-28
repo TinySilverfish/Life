@@ -26,10 +26,6 @@ public class Simulator {
 	// The default depth of the grid.
 	private static final int DEFAULT_DEPTH = 100;
 	
-	// The probability that a Mycoplasma is alive
-	private static final double MYCOPLASMA_ALIVE_PROB = 0.3;
-	
-	private static final double YOUCOPLASMA_ALIVE_PROB = 0.6;
 	// List of cells in the field.
 	private List<Cell> cells;
 	
@@ -46,7 +42,7 @@ public class Simulator {
 	* Execute simulation
 	*/
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(10, 10);
+		Simulator sim = new Simulator(100, 100);
 		sim.simulate(1000);
 	}
 	
@@ -144,13 +140,24 @@ public class Simulator {
 		
 	private void populateHelper(Cell cell) {
 		Random rand = Randomizer.getRandom();
-		int randInt = rand.nextInt(1,3);  	
+		int randInt = rand.nextInt(1, 4);  	
 		
 		if (randInt == 2){
 			cell.setDead();
 		}
-		cells.add(cell);
 
+		if (randInt == 3){
+			setInfected(cell);
+			
+		}
+		cells.add(cell);
+	}
+
+	private void setInfected(Cell cell) {
+		Disease d = new Fungus(0.5, new Color(0, 0, 255), 10);
+        cell.setDisease(d);
+        cell.setInfected(true);
+		d.setHost(cell);
 	}
 	/**
 	* Randomly populate the field live/dead life forms according to the weights
@@ -183,10 +190,6 @@ public class Simulator {
                         break;
                     case 3:
                         Cell theirco = new Theircoplasma(field, location, Color.GREEN);
-						Disease d = new Fungus(1, new Color(0, 0, 255), 10);
-                        theirco.setDisease(d);
-                        theirco.setInfected(true);
-						d.setHost(theirco);
                         populateHelper(theirco);
                         break;
 					case 4:

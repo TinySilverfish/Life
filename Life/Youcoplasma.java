@@ -15,11 +15,15 @@ public class Youcoplasma extends Cell {
 
 	private final int DEAD_AGE = 4;
 
+	private final Color YOUNG_COLOR = new Color(0,0,0);
+
 	private final Color MID_COLOR = new Color(69, 191, 85);
 
 	private final Color DEAD_COLOR = new Color(4, 77, 41);
 
 	private int minNeighbours = 0;
+
+	private int maxNeighbours = 0;
 
 	/**
 	* Create a new Mycoplasma.
@@ -40,9 +44,8 @@ public class Youcoplasma extends Cell {
 		List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
 		setNextState(false);
 
-
 		if (isAlive()) {
-			if (neighbours.size() > 1 && neighbours.size() < 4) {
+			if (neighbours.size() > minNeighbours && neighbours.size() < maxNeighbours) {
 				setNextState(true);
 			}
 		}
@@ -62,15 +65,20 @@ public class Youcoplasma extends Cell {
 
 	private void changePeriod() {
 		switch (age) {
+			case 0:
+				setColor(YOUNG_COLOR);
+				minNeighbours = 1;
+				maxNeighbours = 4;
+				break;
 			case 1:
 				setColor(MID_COLOR);
 				minNeighbours = 2;
-				System.out.println("Aged 1");
+				maxNeighbours = 5;
 				break;
 			case 3:
 				setColor(DEAD_COLOR);
 				minNeighbours = 3;
-				System.out.println("Aged 3");
+				maxNeighbours = 6;
 				break;
 		}
 	}
