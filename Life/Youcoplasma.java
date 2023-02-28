@@ -56,8 +56,8 @@ public class Youcoplasma extends Cell {
 			setNextState(false);
 		} 
 
-		updateAll();
 		changePeriod();
+		updateAll();
 	}
 
 	private void changePeriod() {

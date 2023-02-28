@@ -41,8 +41,6 @@ public class Simulator {
 	
 	// A graphical view of the simulation.
 	private SimulatorView view;
-
-	private Color pink = new Color(249, 181, 208);
 	
 	/**
 	* Execute simulation
@@ -121,7 +119,6 @@ public class Simulator {
 	*/
 	public void simOneGeneration() {
 		generation++;
-		System.out.println("Generation: " + generation);
 		for (Iterator<Cell> it = cells.iterator(); it.hasNext(); ) {
 			Cell cell = it.next();
 			cell.act();

@@ -112,9 +112,7 @@ public class FieldStats {
 
                 if (cell != null) {
                     incrementCount(cell.getClass());
-                    if(cell.isInfected()){
-                        incrementCount(cell.getDisease().getClass());
-                    }
+                    
                 }
             }
         }
