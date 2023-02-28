@@ -48,7 +48,7 @@ public class Simulator {
 	* Execute simulation
 	*/
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(100, 100);
+		Simulator sim = new Simulator(10, 10);
 		sim.simulate(1000);
 	}
 	
@@ -121,6 +121,7 @@ public class Simulator {
 	*/
 	public void simOneGeneration() {
 		generation++;
+		System.out.println("Generation: " + generation);
 		for (Iterator<Cell> it = cells.iterator(); it.hasNext(); ) {
 			Cell cell = it.next();
 			cell.act();
@@ -185,10 +186,10 @@ public class Simulator {
                         break;
                     case 3:
                         Cell theirco = new Theircoplasma(field, location, Color.GREEN);
-						// Disease d = new Virus(1, new Color(0, 0, 255), 10);
-                        // theirco.setDisease(d);
-                        // theirco.setInfected(true);
-						// d.setHost(theirco);
+						Disease d = new Fungus(1, new Color(0, 0, 255), 10);
+                        theirco.setDisease(d);
+                        theirco.setInfected(true);
+						d.setHost(theirco);
                         populateHelper(theirco);
                         break;
 					case 4:

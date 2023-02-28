@@ -21,7 +21,7 @@ public class Virus2 extends Disease{
     }
 
     public void infect(Cell cell){
-        Disease virus = new Virus(getInfectionRate(), getHue(), maxAge);
+        Disease virus = new Fungus(getInfectionRate(), getHue(), maxAge);
         cell.setDisease(virus);
         cell.setInfected(true);
     }

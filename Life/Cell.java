@@ -75,6 +75,13 @@ public abstract class Cell {
 	*/
 	protected void setDead() {
 		alive = false;
+		isInfected = false;
+		if(disease != null){
+			disease.deHost();
+			disease = null;
+			
+		}
+		
 	}
 	
 	/**

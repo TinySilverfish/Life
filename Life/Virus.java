@@ -1,51 +1,51 @@
-import java.awt.Color;
-import java.util.List;
-import java.util.Random;
+// import java.awt.Color;
+// import java.util.List;
+// import java.util.Random;
 
 
-public class Virus extends Disease{
+// public class Fungus extends Disease{
     
-    private int maxAge;
+//     private int maxAge;
     
-    public Virus(double infectionRate, Color hue, int maxAge){
-        super(infectionRate, hue);
-        this.maxAge = maxAge;
+//     public Fungus(double infectionRate, Color hue, int maxAge){
+//         super(infectionRate, hue);
+//         this.maxAge = maxAge;
 
-    }
+//     }
     
-    public void act(Cell cell){
-        // if host died, spread
-        if (!getHost().isAlive()){
-            spread(cell);
-        }
-    }
+//     public void act(Cell cell){
+//         // if host died, spread
+//         if (!getHost().isAlive()){
+//             spread(cell);
+//         }
+//     }
     
-    public void spread(Cell c){
-        //spread to living neighbo7fjh;ghjurs of host with the infection rate
-        List<Cell> livingNeighours = getHost().getField().getLivingNeighbours(getHost().getLocation());
-        Random randomizer = new Random();
+//     public void spread(Cell c){
+//         //spread to living neighbo7fjh;ghjurs of host with the infection rate
+//         List<Cell> livingNeighours = getHost().getField().getLivingNeighbours(getHost().getLocation());
+//         Random randomizer = new Random();
 
-        for (Cell cell : livingNeighours){
-            if (!cell.isInfected() && randomizer.nextDouble() <= getInfectionRate()){
-                cell.setInfected(true);
-                Disease virus = new Virus(getInfectionRate(), getHue(), getMaxAge());
-                cell.setDisease(virus);
-                virus.setHost(cell);
-            }
-        }
-    }
+//         for (Cell cell : livingNeighours){
+//             if (!cell.isInfected() && randomizer.nextDouble() <= getInfectionRate()){
+//                 cell.setInfected(true);
+//                 Disease virus = new Fungus(getInfectionRate(), getHue(), getMaxAge());
+//                 cell.setDisease(virus);
+//                 virus.setHost(cell);
+//             }
+//         }
+//     }
 
-    public void move(){
+//     public void move(){
         
-    }
+//     }
     
-    public int getMaxAge(){
-        return maxAge;
-    }
+//     public int getMaxAge(){
+//         return maxAge;
+//     }
     
-    public void setMaxAge(int maxAge){
-        this.maxAge = maxAge;
-    }
+//     public void setMaxAge(int maxAge){
+//         this.maxAge = maxAge;
+//     }
 
     
-}
+// }

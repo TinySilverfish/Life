@@ -55,13 +55,14 @@ public class Youcoplasma extends Cell {
 		} 
 
 		updateAll();
-		changeColor();
+		changePeriod();
 	}
 
-	private void changeColor() {
+	private void changePeriod() {
 		switch (age) {
 			case 1:
 				setColor(MID_COLOR);
+				
 				break;
 			case 3:
 				setColor(DEAD_COLOR);

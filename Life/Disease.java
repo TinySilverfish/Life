@@ -30,6 +30,9 @@ public abstract class Disease {
     public void setHost(Cell host){
         this.host = host;
     }
+    public void deHost(){
+        host = null;
+    }
     public Color getHue() {
         return this.hue;
     }
