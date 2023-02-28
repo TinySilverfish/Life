@@ -2,9 +2,14 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 /**
- * This class impliment nondetermistic
- *  
- */
+ * A rouge type of cell that doesn't follow the rules
+ * 
+ * This class implements nondetermistic behaviours
+ *
+ * @author David J. Barnes, Michael Kölling & Jeffery Raphael, Hussain Ben Alshaikh & Ian Li
+ * @KNumber K21081772 K21087882
+ * @version 2022.02.28 
+*/
 
 public class Mecoplasma extends Cell {
     
@@ -21,6 +26,7 @@ public class Mecoplasma extends Cell {
         int minNeighbours = 0;
         int maxNeighbours = 0;
 
+        // Decides which of the rules the cell is going to follow in the next turn
         switch(randInt) {
             case 0, 1:
                 minNeighbours = 1;

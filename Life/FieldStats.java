@@ -6,9 +6,10 @@ import java.util.HashMap;
  * of a field. It is flexible: it will create and maintain a counter
  * for any class of object that is found within the field.
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
- */
+ * @author David J. Barnes, Michael Kölling & Jeffery Raphael, Hussain Ben Alshaikh & Ian Li
+ * @KNumber K21081772 K21087882
+ * @version 2022.02.28 
+*/
 
 public class FieldStats {
     // Counters for each type of life in the simulation.
@@ -101,6 +102,7 @@ public class FieldStats {
 
     /**
      * Generate counts of the number of cells.
+     * Checks if it has any diseases
      * These are not kept up to date.
      * @param field The field to generate the stats for.
      */
@@ -109,10 +111,13 @@ public class FieldStats {
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
                 Cell cell = field.getObjectAt(row, col);
-
+                
+                // If the cell is infected, increment the count for the disease
                 if (cell != null) {
                     incrementCount(cell.getClass());
-                    
+                    if(cell.isInfected()){
+                        incrementCount(cell.getDisease().getClass());
+                    }
                 }
             }
         }

@@ -1,9 +1,7 @@
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.random.RandomGenerator.ArbitrarilyJumpableGenerator;
-
 import javax.lang.model.util.ElementScanner14;
-
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.ArrayList;
@@ -12,12 +10,13 @@ import java.util.Iterator;
 import java.awt.Color;
 
 /**
-* A Life (Game of Life) simulator, first described by British mathematician
-* John Horton Conway in 1970.
-*
-* @author David J. Barnes, Michael Kölling & Jeffery Raphael
-* @version 2022.01.06 (1)
-*/
+ * A Life (Game of Life) simulator, first described by British mathematician
+ * John Horton Conway in 1970.
+ *
+ * @author David J. Barnes, Michael Kölling & Jeffery Raphael, Hussain Ben Alshaikh & Ian Li
+ * @KNumber K21081772 K21087882
+ * @version 2022.02.28 
+ */
 
 public class Simulator {
 	// The default width for the grid.
@@ -40,7 +39,7 @@ public class Simulator {
 	
 	/**
 	* Execute simulation
-	*/
+	*/	
 	public static void main(String[] args) {
 		Simulator sim = new Simulator(100, 100);
 		sim.simulate(1000);
@@ -137,7 +136,14 @@ public class Simulator {
 		// Show the starting state in the view.
 		view.showStatus(generation, field);
 	} 
-		
+	
+	
+	/**
+	 * A helper method for Populate()
+	 * gives equal chance for a cell to be either alive, dead, or infected
+	 * 
+	 * @param cell
+	*/
 	private void populateHelper(Cell cell) {
 		Random rand = Randomizer.getRandom();
 		int randInt = rand.nextInt(1, 4);  	
@@ -152,31 +158,29 @@ public class Simulator {
 		}
 		cells.add(cell);
 	}
-
+	
+	/**
+	 * Set a cell to be infected
+	 * 
+	 * @param cell
+	 */
 	private void setInfected(Cell cell) {
-		Disease d = new Fungus(0.5, new Color(0, 0, 255), 10);
+		Disease d = new Fungus(0.5, new Color(0, 0, 255));
         cell.setDisease(d);
         cell.setInfected(true);
 		d.setHost(cell);
 	}
+
 	/**
 	* Randomly populate the field live/dead life forms according to the weights
 	*/
-	
-	
 	private void populate() {
 		Random rand = Randomizer.getRandom();
 		field.clear();
 		for (int row = 0; row < field.getDepth(); row++) {
 			for (int col = 0; col < field.getWidth(); col++) {
-
 				
 				Location location = new Location(row, col);
-				
-				// Build list of objects
-				
-				Double randDouble = rand.nextDouble();  
-
 				int randInt = rand.nextInt(1, 6);
 				
 				switch(randInt){
@@ -201,14 +205,10 @@ public class Simulator {
                         populateHelper(meco);
                      	break;
 				}
-
 			}
 		}
 	}
-	
-								
-								
-								
+					
 	/**
 	* Pause for a given time.
 	* @param millisec  The time to pause for, in milliseconds

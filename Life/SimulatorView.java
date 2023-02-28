@@ -9,8 +9,9 @@ import java.util.Map;
 * each location. Colors for each type of life form can be defined using the
 * setColor method.
 *
-* @author David J. Barnes, Michael Kölling & Jeffery Raphael
-* @version 2022.01.06 (1)
+* @author David J. Barnes, Michael Kölling & Jeffery Raphael, Hussain Ben Alshaikh & Ian Li
+* @KNumber K21081772 K21087882
+* @version 2022.02.28 
 */
 
 public class SimulatorView extends JFrame {
@@ -51,6 +52,7 @@ public class SimulatorView extends JFrame {
 	* @param width  The simulation's width.
 	*/
 	public SimulatorView(int height, int width) {
+		
 		stats = new FieldStats();
 		
 		setTitle("Life Simulation");
@@ -64,6 +66,7 @@ public class SimulatorView extends JFrame {
 		
 		Container contents = getContentPane();
 		
+		// Add generation label and information label to the content panel
 		JPanel infoPane = new JPanel(new BorderLayout());
 		infoPane.add(genLabel, BorderLayout.WEST);
 		infoPane.add(infoLabel, BorderLayout.CENTER);
@@ -73,6 +76,7 @@ public class SimulatorView extends JFrame {
 		pack();
 		setVisible(true);
 
+		// Add generation label and information label to the content panel
 		pauseButton = new JButton("Pause");
 		pauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,6 +105,7 @@ public class SimulatorView extends JFrame {
 			}
 		});
 
+		// Add generation label and information label to the content panel
 		JPanel buttonPane = new JPanel();
 		buttonPane.add(pauseButton);
 		buttonPane.add(resumeButton);
@@ -108,18 +113,28 @@ public class SimulatorView extends JFrame {
 		contents.add(buttonPane, BorderLayout.NORTH);
 	}
 	
-
+	/**
+	 * Check if the simulation is paused
+	 * @return True if the simulation is paused.
+	 */
 	public boolean isPaused() {
 		return isPaused;
 	}
-	
+	/**
+	 * Check if the simulation is in step mode.
+	 * @return True if the simulation is in step mode.
+	 */
 	public boolean isStep() {
 		return isStep;
 	}
 
+	/**
+	 * Clear the step mode.
+	 */
 	public void clearStep() {
 		isStep= false;
 	}
+	
 	/**
 	* Display a short information label at the top of the window.
 	*/

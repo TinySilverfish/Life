@@ -6,13 +6,16 @@ import java.util.Random;
 * Friends of Mycoplasma
 * Fun Fact: Youcoplasma was first created as a joke among friends.
 * It shares similar characteristics with Mycoplasma.
+* Speciality: Has a 
 * 
-* 
+* @author David J. Barnes, Michael Kölling & Jeffery Raphael, Hussain Ben Alshaikh & Ian Li
+* @KNumber K21081772 K21087882
+* @version 2022.02.28 
 */
 
 public class Youcoplasma extends Cell {
 	
-
+	//Maximum age for Youco cells
 	private final int DEAD_AGE = 4;
 
 	private final Color YOUNG_COLOR = new Color(0,0,0);
@@ -21,9 +24,9 @@ public class Youcoplasma extends Cell {
 
 	private final Color DEAD_COLOR = new Color(4, 77, 41);
 
-	private int minNeighbours = 0;
+	private int minNeighbours = 1;
 
-	private int maxNeighbours = 0;
+	private int maxNeighbours = 4;
 
 	/**
 	* Create a new Mycoplasma.
@@ -55,6 +58,7 @@ public class Youcoplasma extends Cell {
 			}
 		}
 
+		//Checking maximum age
 		if (age > DEAD_AGE) {
 			setNextState(false);
 		} 
@@ -63,6 +67,9 @@ public class Youcoplasma extends Cell {
 		updateAll();
 	}
 
+	/**
+	 * Updates the cell with the correct paraemters for its age and updates color 
+	 */
 	private void changePeriod() {
 		switch (age) {
 			case 0:
