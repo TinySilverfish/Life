@@ -18,34 +18,34 @@ public class Mecoplasma extends Cell {
 
         Random rand = Randomizer.getRandom();
         int randInt = rand.nextInt(0, 10);
-        int minValue = 0;
-        int maxValue = 0;
+        int minNeighbours = 0;
+        int maxNeighbours = 0;
 
         switch(randInt) {
             case 0, 1:
-                minValue = 1;
-                maxValue = 3;
+                minNeighbours = 1;
+                maxNeighbours = 3;
                 break;
 
             case 2, 3, 4, 5, 6, 7:
-                minValue = 2;
-                maxValue = 4;
+                minNeighbours = 2;
+                maxNeighbours = 4;
                 break;
 
 
             case 8, 9:
-                minValue = 3;
-                maxValue = 5;
+                minNeighbours = 3;
+                maxNeighbours = 5;
                 break;
         }
 
         if (isAlive()) {
-            if (neighbours.size() > minValue && neighbours.size() < maxValue) {
+            if (neighbours.size() > minNeighbours && neighbours.size() < maxNeighbours) {
                 setNextState(true);
             }
         }
         else {
-            if (neighbours.size() == minValue) {
+            if (neighbours.size() == minNeighbours) {
                 setNextState(true);
             }
         }

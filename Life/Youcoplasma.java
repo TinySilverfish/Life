@@ -19,6 +19,8 @@ public class Youcoplasma extends Cell {
 
 	private final Color DEAD_COLOR = new Color(4, 77, 41);
 
+	private int minNeighbours = 0;
+
 	/**
 	* Create a new Mycoplasma.
 	*
@@ -37,8 +39,8 @@ public class Youcoplasma extends Cell {
 	public void act() {
 		List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
 		setNextState(false);
-		
-		
+
+
 		if (isAlive()) {
 			if (neighbours.size() > 1 && neighbours.size() < 4) {
 				setNextState(true);
@@ -62,10 +64,13 @@ public class Youcoplasma extends Cell {
 		switch (age) {
 			case 1:
 				setColor(MID_COLOR);
-				
+				minNeighbours = 2;
+				System.out.println("Aged 1");
 				break;
 			case 3:
 				setColor(DEAD_COLOR);
+				minNeighbours = 3;
+				System.out.println("Aged 3");
 				break;
 		}
 	}
